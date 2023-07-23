@@ -71,6 +71,7 @@ members = [
     "apps/std/mio-tcpserver",
     "apps/std/tokio-echoserver",
     "apps/std/socket2-echoserver",
+    "apps/std/rosrust-publisher-node",
 ]
 
 [profile.release]
