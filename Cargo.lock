@@ -632,6 +632,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "block-buffer"
+version = "0.10.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3078c7629b62d3f0439517fa394996acacc5cbc91c5a20d8c658e77abd503a71"
+dependencies = [
+ "generic-array",
+]
+
+[[package]]
 name = "brotli"
 version = "3.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -791,21 +800,19 @@ dependencies = [
 ]
 
 [[package]]
-name = "colored"
-version = "2.0.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2674ec482fbc38012cf31e6c42ba0177b431a0cb6f15fe40efa5aab1bda516f6"
-dependencies = [
- "is-terminal",
- "lazy_static",
- "windows-sys",
-]
-
-[[package]]
 name = "core-foundation-sys"
 version = "0.8.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e496a50fda8aacccc86d7529e2c1e0892dbd0f898a6b5645b5561b89c3210efa"
+
+[[package]]
+name = "cpufeatures"
+version = "0.2.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a17b76ff3a4162b0b27f354a0c87015ddad39d35f9c0c36607a3bdd175dde1f1"
+dependencies = [
+ "libc",
+]
 
 [[package]]
 name = "crate_interface"
@@ -899,13 +906,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "ctrlc"
-version = "3.4.0"
+name = "crypto-common"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2a011bbe2c35ce9c1f143b7af6f94f29a167beb4cd1d29e6740ce836f723120e"
+checksum = "1bfb12502f3fc46cca1bb51ac28df9d618d813cdc3d2f25b9fe775a34af26bb3"
 dependencies = [
- "nix",
- "windows-sys",
+ "generic-array",
+ "typenum",
 ]
 
 [[package]]
@@ -957,6 +964,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d3dd60d1080a57a05ab032377049e0591415d2b31afd7028356dbf3cc6dcb066"
 dependencies = [
  "generic-array",
+]
+
+[[package]]
+name = "digest"
+version = "0.10.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9ed9a281f7bc9b7576e61468ba615a66a5c8cfdff42420a70aa82701a3b1e292"
+dependencies = [
+ "block-buffer 0.10.4",
+ "crypto-common",
 ]
 
 [[package]]
@@ -1116,18 +1133,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "filetime"
-version = "0.2.21"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5cbc844cecaee9d4443931972e1289c8ff485cb4cc2767cb03ca139ed6885153"
-dependencies = [
- "cfg-if",
- "libc",
- "redox_syscall 0.2.16",
- "windows-sys",
-]
-
-[[package]]
 name = "flatten_objects"
 version = "0.1.0"
 dependencies = [
@@ -1266,17 +1271,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
 
 [[package]]
-name = "hostname"
-version = "0.3.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3c731c3e10504cc8ed35cfe2f1db4c9274c3d35fa486e3b31df46f068ef3e867"
-dependencies = [
- "libc",
- "match_cfg",
- "winapi",
-]
-
-[[package]]
 name = "httparse"
 version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1290,17 +1284,16 @@ checksum = "c4a1e36c821dbe04574f602848a19f742f4fb3c98d40449f11bcad18d6b17421"
 
 [[package]]
 name = "hyper"
-version = "0.10.16"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0a0652d9a2609a968c14be1a9ea00bf4b1d64e2e1f53a1b51b6fff3a6e829273"
+version = "0.10.15"
+source = "git+https://github.com/hky1999/hyper#e0a2922ed8941bbf75c6f02d9a8d42b691f2124d"
 dependencies = [
  "base64 0.9.3",
+ "chrono",
  "httparse",
  "language-tags",
  "log 0.3.9",
  "mime 0.2.6",
  "num_cpus",
- "time 0.1.45",
  "traitobject",
  "typeable",
  "unicase 1.4.2",
@@ -1388,17 +1381,6 @@ checksum = "eae7b9aee968036d54dce06cebaefd919e4472e753296daccd6d344e3e2df0c2"
 dependencies = [
  "hermit-abi 0.3.1",
  "libc",
- "windows-sys",
-]
-
-[[package]]
-name = "is-terminal"
-version = "0.4.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cb0889898416213fab133e1d33a0e5858a48177452750691bde3666d0fdbaf8b"
-dependencies = [
- "hermit-abi 0.3.1",
- "rustix 0.38.4",
  "windows-sys",
 ]
 
@@ -1518,12 +1500,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ef53942eb7bf7ff43a617b3e2c1c4a5ecf5944a7c1bc12d7ee39bbb15e5c1519"
 
 [[package]]
-name = "linux-raw-sys"
-version = "0.4.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "09fc20d2ca12cb9f044c93e3bd6d32d523e6e2ec3db4f7b2939cd99026ecd3f0"
-
-[[package]]
 name = "lock_api"
 version = "0.4.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1555,12 +1531,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0ca88d725a0a943b096803bd34e73a4437208b6077654cc4ecb2947a5f91618d"
 
 [[package]]
-name = "match_cfg"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ffbee8634e0d45d258acb448e7eaab3fce7a0a467395d4d9f228e3c1f01fb2e4"
-
-[[package]]
 name = "matches"
 version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1572,8 +1542,8 @@ version = "0.9.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7b5a279bb9607f9f53c22d496eade00d138d1bdcccd07d74650387cf94942a15"
 dependencies = [
- "block-buffer",
- "digest",
+ "block-buffer 0.9.0",
+ "digest 0.9.0",
  "opaque-debug",
 ]
 
@@ -1671,16 +1641,15 @@ dependencies = [
 [[package]]
 name = "multipart"
 version = "0.18.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "00dec633863867f29cb39df64a397cdf4a6354708ddd7759f70c7fb51c5f9182"
+source = "git+https://github.com/hky1999/multipart#f45cc1937d38928323c7ac2f1603ffba5eba3aa1"
 dependencies = [
  "buf_redux",
+ "fastrand",
  "httparse",
  "log 0.4.19",
  "mime 0.3.17",
  "mime_guess",
  "quick-error",
- "rand",
  "safemem 0.3.3",
  "tempfile",
  "twoway",
@@ -1700,18 +1669,6 @@ name = "nb"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8d5439c4ad607c3c23abf66de8c8bf57ba8adcd1f129e699851a6e43935d339d"
-
-[[package]]
-name = "nix"
-version = "0.26.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bfdda3d196821d6af13126e40375cdf7da646a96114af134d5f417a9a1dc8e1a"
-dependencies = [
- "bitflags 1.3.2",
- "cfg-if",
- "libc",
- "static_assertions",
-]
 
 [[package]]
 name = "nom"
@@ -1964,15 +1921,6 @@ dependencies = [
 
 [[package]]
 name = "redox_syscall"
-version = "0.2.16"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb5a58c1855b4b6819d59012155603f0b22ad30cad752600aadfcb695265519a"
-dependencies = [
- "bitflags 1.3.2",
-]
-
-[[package]]
-name = "redox_syscall"
 version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "567664f262709473930a4bf9e51bf2ebf3348f2e748ccc50dea20646858f8f29"
@@ -2033,8 +1981,7 @@ dependencies = [
 [[package]]
 name = "ros_message"
 version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f0bf6267f6ea633c697228fcc70b4041271f4eb09d84a8962f6ee8ff366ee411"
+source = "git+https://github.com/jiyuan0125/rosrust.git#c9cc23461aba8f706c78d4912f70789d263666d8"
 dependencies = [
  "array-init",
  "hex",
@@ -2050,15 +1997,11 @@ dependencies = [
 [[package]]
 name = "rosrust"
 version = "0.9.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ad4e09ad9845ebe0d558a2ad29bc99270b9f18461b24dfa48a43c2b2d58e1d4e"
+source = "git+https://github.com/jiyuan0125/rosrust.git#c9cc23461aba8f706c78d4912f70789d263666d8"
 dependencies = [
  "byteorder",
- "colored",
  "crossbeam",
- "ctrlc",
  "error-chain 0.12.4",
- "hostname",
  "lazy_static",
  "log 0.4.19",
  "regex 1.8.4",
@@ -2066,7 +2009,6 @@ dependencies = [
  "rosrust_codegen",
  "serde",
  "serde_derive",
- "socket2 0.4.9 (registry+https://github.com/rust-lang/crates.io-index)",
  "xml-rpc",
  "yaml-rust",
 ]
@@ -2082,8 +2024,7 @@ dependencies = [
 [[package]]
 name = "rosrust_codegen"
 version = "0.9.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "152b6795be28c58d6d1f183499957e3b9b79e288f9fe0fc339a33f8d89662fcb"
+source = "git+https://github.com/jiyuan0125/rosrust.git#c9cc23461aba8f706c78d4912f70789d263666d8"
 dependencies = [
  "error-chain 0.12.4",
  "hex",
@@ -2097,22 +2038,21 @@ dependencies = [
 
 [[package]]
 name = "rouille"
-version = "3.6.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3716fbf57fc1084d7a706adf4e445298d123e4a44294c4e8213caf1b85fcc921"
+version = "3.6.1"
+source = "git+https://github.com/hky1999/rouille#8735c41a5d3dd6ecc18e5f725b21ac5d03a02507"
 dependencies = [
  "base64 0.13.1",
  "brotli",
  "chrono",
  "deflate",
- "filetime",
+ "fastrand",
  "multipart",
+ "num_cpus",
  "percent-encoding 2.3.0",
- "rand",
  "serde",
  "serde_derive",
  "serde_json",
- "sha1_smol",
+ "sha1",
  "threadpool",
  "time 0.3.23",
  "tiny_http",
@@ -2150,20 +2090,7 @@ dependencies = [
  "errno",
  "io-lifetimes",
  "libc",
- "linux-raw-sys 0.3.8",
- "windows-sys",
-]
-
-[[package]]
-name = "rustix"
-version = "0.38.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0a962918ea88d644592894bc6dc55acc6c0956488adcebbfb6e273506b7fd6e5"
-dependencies = [
- "bitflags 2.3.3",
- "errno",
- "libc",
- "linux-raw-sys 0.4.3",
+ "linux-raw-sys",
  "windows-sys",
 ]
 
@@ -2280,10 +2207,15 @@ dependencies = [
 ]
 
 [[package]]
-name = "sha1_smol"
-version = "1.0.0"
+name = "sha1"
+version = "0.10.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ae1a47186c03a32177042e55dbc5fd5aee900b8e0069a8d70fba96a9375cd012"
+checksum = "f04293dc80c3993519f2d7f6f511707ee7094fe0c6d3406feb330cdb3540eba3"
+dependencies = [
+ "cfg-if",
+ "cpufeatures",
+ "digest 0.10.7",
+]
 
 [[package]]
 name = "shlex"
@@ -2411,8 +2343,8 @@ dependencies = [
  "autocfg",
  "cfg-if",
  "fastrand",
- "redox_syscall 0.3.5",
- "rustix 0.37.20",
+ "redox_syscall",
+ "rustix",
  "windows-sys",
 ]
 
@@ -2968,8 +2900,7 @@ dependencies = [
 [[package]]
 name = "xml-rpc"
 version = "0.0.12"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3764ec0b1224a569a4962c6f45663bcd734662dd3f3e6485c3b8ca81fa5e00a2"
+source = "git+https://github.com/hky1999/xml-rpc-rs#736a1ade0bc08248f9e78d96eff2b9c477a433ba"
 dependencies = [
  "base64 0.6.0",
  "error-chain 0.10.0",

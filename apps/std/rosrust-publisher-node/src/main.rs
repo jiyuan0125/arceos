@@ -20,7 +20,10 @@
 //! should be able to see them all make progress simultaneously.
 
 fn main() {
-    // 这里没有写 rosrust 的代码，先运行下面的命令，试试能不能编译通过
-    // make A=apps/std/rosrust-publisher-node STD=y NET=y ACCEL=n run
-    println!("Hello, world");
+    // 使用命令 make A=apps/std/rosrust-publisher-node STD=y NET=y ACCEL=n build 编译
+    // 报错: 
+    // LLVM ERROR: Do not know how to split the result of this operator!
+    // error: could not compile `rosrust-publisher-node` (bin "rosrust-publisher-node")
+    // make: *** [scripts/make/build.mk:43: _cargo_build] Error 101
+    rosrust::init("talker");
 }
