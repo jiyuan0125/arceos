@@ -71,6 +71,7 @@ members = [
     "apps/std/mio-tcpserver",
     "apps/std/tokio-echoserver",
     "apps/std/socket2-echoserver",
+    "apps/std/rosrust-publisher-node",
 ]
 
 [profile.release]
@@ -78,3 +79,6 @@ lto = true
 
 [patch.crates-io]
 crate_interface = { path = "crates/crate_interface" }
+tokio = { git = "https://github.com/arceos-os/tokio.git", branch = "arceos" }
+socket2 = { git = "https://github.com/arceos-os/socket2.git", branch = "arceos" }
+mio = { git = "https://github.com/arceos-os/mio.git", branch = "arceos" }
