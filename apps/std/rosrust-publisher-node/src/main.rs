@@ -11,19 +11,51 @@
 //!
 //!     make A=apps/std/rosrust-publisher-node STD=y NET=y ACCEL=n run
 //!
-//! and in another terminal you can run:
-//!
-//!     cargo run --example connect 127.0.0.1:5555
-//!
 //! Each line you type in to the `connect` terminal should be echo'd back to
 //! you! If you open up multiple terminals running the `connect` example you
 //! should be able to see them all make progress simultaneously.
 
+const ROS_MASTER_URI: &str = "http://10.0.2.2:11311";
+
 fn main() {
-    // 使用命令 make A=apps/std/rosrust-publisher-node STD=y NET=y ACCEL=n build 编译
-    // 报错: 
-    // LLVM ERROR: Do not know how to split the result of this operator!
-    // error: could not compile `rosrust-publisher-node` (bin "rosrust-publisher-node")
-    // make: *** [scripts/make/build.mk:43: _cargo_build] Error 101
-    rosrust::init("talker");
+
+    println!("starting!");
+
+    // Initialize node
+    rosrust::init_with_master_uri("talker", ROS_MASTER_URI);
+    println!("initialized!");
+
+    // Create publisher
+    let chatter_pub = rosrust::publish("chatter", 2).unwrap();
+    chatter_pub.wait_for_subscribers(None).unwrap();
+
+    let log_names = rosrust::param("~log_names").unwrap().get().unwrap_or(false);
+
+    let mut count = 0;
+
+    // Create object that maintains 10Hz between sleep requests
+    let rate = rosrust::rate(10.0);
+
+    // Breaks when a shutdown signal is sent
+    while rosrust::is_ok() {
+        // Create string message
+        let msg = rosrust_msg::std_msgs::String {
+            data: format!("hello world from rosrust {}", count),
+        };
+
+        // Log event
+        rosrust::ros_info!("Publishing: {}", msg.data);
+
+        // Send string message to topic via publisher
+        chatter_pub.send(msg).unwrap();
+
+        if log_names {
+            rosrust::ros_info!("Subscriber names: {:?}", chatter_pub.subscriber_names());
+        }
+
+        // Sleep to maintain 10Hz rate
+        rate.sleep();
+
+        count += 1;
+    }
 }

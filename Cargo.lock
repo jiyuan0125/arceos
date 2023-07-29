@@ -1981,7 +1981,7 @@ dependencies = [
 [[package]]
 name = "ros_message"
 version = "0.1.1"
-source = "git+https://github.com/jiyuan0125/rosrust.git#c9cc23461aba8f706c78d4912f70789d263666d8"
+source = "git+https://github.com/jiyuan0125/rosrust.git#27bd5f479d1a3c52d76fdf9014ad6071602c3738"
 dependencies = [
  "array-init",
  "hex",
@@ -1997,7 +1997,7 @@ dependencies = [
 [[package]]
 name = "rosrust"
 version = "0.9.11"
-source = "git+https://github.com/jiyuan0125/rosrust.git#c9cc23461aba8f706c78d4912f70789d263666d8"
+source = "git+https://github.com/jiyuan0125/rosrust.git#27bd5f479d1a3c52d76fdf9014ad6071602c3738"
 dependencies = [
  "byteorder",
  "crossbeam",
@@ -2019,12 +2019,13 @@ version = "0.1.0"
 dependencies = [
  "axstd",
  "rosrust",
+ "rosrust_msg",
 ]
 
 [[package]]
 name = "rosrust_codegen"
 version = "0.9.6"
-source = "git+https://github.com/jiyuan0125/rosrust.git#c9cc23461aba8f706c78d4912f70789d263666d8"
+source = "git+https://github.com/jiyuan0125/rosrust.git#27bd5f479d1a3c52d76fdf9014ad6071602c3738"
 dependencies = [
  "error-chain 0.12.4",
  "hex",
@@ -2034,6 +2035,14 @@ dependencies = [
  "quote",
  "ros_message",
  "syn 1.0.109",
+]
+
+[[package]]
+name = "rosrust_msg"
+version = "0.1.7"
+source = "git+https://github.com/jiyuan0125/rosrust.git#27bd5f479d1a3c52d76fdf9014ad6071602c3738"
+dependencies = [
+ "rosrust",
 ]
 
 [[package]]
