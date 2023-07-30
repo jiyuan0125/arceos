@@ -1,5 +1,5 @@
 [package]
-name = "rosrust-publisher-node"
+name = "rosrust-subscriber-node"
 version = "0.1.0"
 edition = "2021"
 authors = ["Jiyuan Su <jiyuan0125@126.com>"]

@@ -23,40 +23,26 @@ fn main() {
     println!("starting!");
 
     // Initialize node
-    rosrust::init_with_master_uri("talker", ROS_MASTER_URI);
-    println!("initialized!");
+    rosrust::init_with_master_uri("listener", ROS_MASTER_URI);
 
-    // Create publisher
-    let chatter_pub = rosrust::publish("chatter", 2).unwrap();
-    chatter_pub.wait_for_subscribers(None).unwrap();
+    // Create subscriber
+    // The subscriber is stopped when the returned object is destroyed
+    let subscriber_info = rosrust::subscribe("chatter", 2, |v: rosrust_msg::std_msgs::String| {
+        // Callback for handling received messages
+        rosrust::ros_info!("Received: {}", v.data);
+    })
+    .unwrap();
 
     let log_names = rosrust::param("~log_names").unwrap().get().unwrap_or(false);
 
-    let mut count = 0;
-
-    // Create object that maintains 10Hz between sleep requests
-    let rate = rosrust::rate(10.0);
-
-    // Breaks when a shutdown signal is sent
-    while rosrust::is_ok() {
-        // Create string message
-        let msg = rosrust_msg::std_msgs::String {
-            data: format!("hello world from rosrust {}", count),
-        };
-
-        // Log event
-        rosrust::ros_info!("Publishing: {}", msg.data);
-
-        // Send string message to topic via publisher
-        chatter_pub.send(msg).unwrap();
-
-        if log_names {
-            rosrust::ros_info!("Subscriber names: {:?}", chatter_pub.subscriber_names());
+    if log_names {
+        let rate = rosrust::rate(1.0);
+        while rosrust::is_ok() {
+            rosrust::ros_info!("Publisher uris: {:?}", subscriber_info.publisher_uris());
+            rate.sleep();
         }
-
-        // Sleep to maintain 10Hz rate
-        rate.sleep();
-
-        count += 1;
+    } else {
+        // Block the thread until a shutdown signal is received
+        rosrust::spin();
     }
 }
