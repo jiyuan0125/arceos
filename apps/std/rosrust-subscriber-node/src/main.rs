@@ -10,7 +10,7 @@
 //! To see this server in action, you can run this in one terminal:
 //!
 //!     export CARGO_CFG_HTTPARSE_DISABLE_SIMD=1
-//!     make A=apps/std/rosrust-publisher-node STD=y NET=y ACCEL=n SMP=2 run
+//!     make A=apps/std/rosrust-subscriber-node STD=y NET=y ACCEL=n SMP=2 run
 //!
 //! Each line you type in to the `connect` terminal should be echo'd back to
 //! you! If you open up multiple terminals running the `connect` example you

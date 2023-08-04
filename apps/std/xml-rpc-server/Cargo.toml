@@ -1,0 +1,14 @@
+[package]
+name = "xml-rpc-server"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jiyuan Su <jiyuan0125@126.com>"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+xml-rpc = { path = "/home/baru/Work/GitHub/Fork/xml-rpc-rs" }
+serde = "1"
+serde_derive = "1"
+
+axstd = { path = "../../../ulib/axstd", features = ["alloc", "net", "multitask"] }

@@ -73,6 +73,7 @@ members = [
     "apps/std/socket2-echoserver",
     "apps/std/rosrust-publisher-node",
     "apps/std/rosrust-subscriber-node",
+    "apps/std/xml-rpc-server",
 ]
 
 [profile.release]
