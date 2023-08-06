@@ -1,5 +1,5 @@
 [package]
-name = "xml-rpc-server"
+name = "tiny-server"
 version = "0.1.0"
 edition = "2021"
 authors = ["Jiyuan Su <jiyuan0125@126.com>"]
@@ -7,7 +7,7 @@ authors = ["Jiyuan Su <jiyuan0125@126.com>"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-xml-rpc = { git = "http://github.com/jiyuan0125/xml-rpc-rs", branch = "arceos" }
+tiny_http = { git = "http://github.com/jiyuan0125/tiny-http", branch = "for-arceos2" }
 serde = "1"
 serde_derive = "1"
 

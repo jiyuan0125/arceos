@@ -90,6 +90,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "anyhow"
+version = "1.0.72"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3b13c32d80ecc7ab747b80c3784bce54ee8a7a0cc4fbda9bf4cda2cf6fe90854"
+
+[[package]]
 name = "arceos-display"
 version = "0.1.0"
 dependencies = [
@@ -1307,6 +1313,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "hyper-server"
+version = "0.1.0"
+dependencies = [
+ "axstd",
+ "hyper",
+]
+
+[[package]]
 name = "iana-time-zone"
 version = "0.1.57"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2080,7 +2094,7 @@ dependencies = [
  "sha1",
  "threadpool",
  "time 0.3.23",
- "tiny_http",
+ "tiny_http 0.12.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "url 2.4.0",
 ]
 
@@ -2458,10 +2472,31 @@ name = "timer_list"
 version = "0.1.0"
 
 [[package]]
+name = "tiny-server"
+version = "0.1.0"
+dependencies = [
+ "axstd",
+ "serde",
+ "serde_derive",
+ "tiny_http 0.12.0 (git+http://github.com/jiyuan0125/tiny-http?branch=for-arceos2)",
+]
+
+[[package]]
 name = "tiny_http"
 version = "0.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "389915df6413a2e74fb181895f933386023c71110878cd0825588928e64cdc82"
+dependencies = [
+ "ascii",
+ "chunked_transfer",
+ "httpdate",
+ "log 0.4.19",
+]
+
+[[package]]
+name = "tiny_http"
+version = "0.12.0"
+source = "git+http://github.com/jiyuan0125/tiny-http?branch=for-arceos2#9827aae83c01886bb0434c7fc4681c969e640d62"
 dependencies = [
  "ascii",
  "chunked_transfer",
@@ -2923,7 +2958,7 @@ dependencies = [
 [[package]]
 name = "xml-rpc"
 version = "0.0.12"
-source = "git+https://github.com/jiyuan0125/xml-rpc-rs?branch=arceos#6f08b02c2c68fae579a3ff80901b848c9f8eba84"
+source = "git+http://github.com/jiyuan0125/xml-rpc-rs?branch=arceos#6f08b02c2c68fae579a3ff80901b848c9f8eba84"
 dependencies = [
  "base64 0.6.0",
  "error-chain 0.10.0",
@@ -2937,6 +2972,33 @@ dependencies = [
  "serde_bytes",
  "serde_derive",
  "xml-rs 0.6.1",
+]
+
+[[package]]
+name = "xml-rpc-arceos"
+version = "0.1.0"
+dependencies = [
+ "log 0.4.19",
+ "thiserror",
+]
+
+[[package]]
+name = "xml-rpc-arceos-server"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "axstd",
+ "xml-rpc-arceos",
+]
+
+[[package]]
+name = "xml-rpc-server"
+version = "0.1.0"
+dependencies = [
+ "axstd",
+ "serde",
+ "serde_derive",
+ "xml-rpc",
 ]
 
 [[package]]

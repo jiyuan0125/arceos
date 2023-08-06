@@ -3,7 +3,7 @@ extern crate xml_rpc;
 extern crate serde_derive;
 
 use std::{net, thread};
-use xml_rpc::{Client, Fault, Server};
+use xml_rpc::{Fault, Server};
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 struct TestStruct {

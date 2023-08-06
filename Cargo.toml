@@ -74,6 +74,9 @@ members = [
     "apps/std/rosrust-publisher-node",
     "apps/std/rosrust-subscriber-node",
     "apps/std/xml-rpc-server",
+    "apps/std/hyper-server",
+    "apps/std/tiny-server",
+    "apps/std/xml-rpc-arceos-server",
 ]
 
 [profile.release]

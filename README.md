@@ -59,6 +59,37 @@ The currently supported applications (Rust), as well as their dependent modules 
 
 ## Build & Run
 
+### Construct a bridge mode networking
+
+#### Install tools
+```
+sudo apt install uml-utilities
+sudo apt install bridge-utils
+```
+#### Create two scripts for qemu bridge mode networking
+/etc/qemu-ifup
+```
+#!/bin/sh
+ 
+br0_exist_flag=`ifconfig|grep -ci "br0"`
+if [ $br0_exist_flag -eq 0 ];then
+sudo brctl addbr br0
+sudo ifconfig br0 10.0.2.2 netmask 255.255.255.0 up
+sudo route add -net 10.0.2.0 netmask 255.255.255.0 br0
+#sudo route add default gw 192.168.1.1 br0
+fi
+ 
+sudo tunctl -t $1 -u root
+sudo ifconfig $1 up
+sudo brctl addif br0 $1
+```
+/etc/qemu-ifdown
+```
+#!/bin/sh
+sudo ifconfig $1 down
+sudo brctl delif br0 $1
+```
+
 ### Install build dependencies
 
 Install [cargo-binutils](https://github.com/rust-embedded/cargo-binutils) to use `rust-objcopy` and `rust-objdump` tools:
