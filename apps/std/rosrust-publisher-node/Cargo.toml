@@ -7,7 +7,7 @@ authors = ["Jiyuan Su <jiyuan0125@126.com>"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rosrust = { git = "https://github.com/jiyuan0125/rosrust.git", branch = "arceos"}
-rosrust_msg = { git = "https://github.com/jiyuan0125/rosrust.git", branch = "arceos"}
+rosrust = { git = "https://github.com/jiyuan0125/rosrust.git", rev = "f7577292a609a973c8000188cda91efc0ca26601"}
+rosrust_msg = { git = "https://github.com/jiyuan0125/rosrust.git", rev = "f7577292a609a973c8000188cda91efc0ca26601"}
 
 axstd = { path = "../../../ulib/axstd", features = ["net", "multitask"] }

@@ -1,29 +1,17 @@
-//! A "hello world" echo server with Tokio
-//!
-//! This server will create a TCP listener, accept connections in a loop, and
-//! write back everything that's read off of each TCP connection.
-//!
-//! Because the Tokio runtime uses a thread pool, each TCP connection is
-//! processed concurrently with all other TCP connections across multiple
-//! threads.
-//!
-//! To see this server in action, you can run this in one terminal:
-//!
-//!     export CARGO_CFG_HTTPARSE_DISABLE_SIMD=1
-//!     make A=apps/std/rosrust-publisher-node STD=y NET=y ACCEL=n SMP=2 run
-//!
-//! Each line you type in to the `connect` terminal should be echo'd back to
-//! you! If you open up multiple terminals running the `connect` example you
-//! should be able to see them all make progress simultaneously.
-
+// export CARGO_CFG_HTTPARSE_DISABLE_SIMD=1
+// make A=apps/std/rosrust-publisher-node STD=y NET=y LOG=info SMP=2 ACCEL=n run
 const ROS_MASTER_URI: &str = "http://10.0.2.2:11311";
 
 fn main() {
-
     println!("starting!");
 
     // Initialize node
-    rosrust::init_with_master_uri("talker", ROS_MASTER_URI);
+    rosrust::init_with_master_uri_and_hostname_and_slave_port(
+        "talker",
+        ROS_MASTER_URI,
+        "192.168.203.132",
+        5555,
+    );
     println!("initialized!");
 
     // Create publisher
