@@ -1,6 +1,8 @@
 // export CARGO_CFG_HTTPARSE_DISABLE_SIMD=1
 // make A=apps/std/rosrust-publisher-node STD=y NET=y LOG=info SMP=2 ACCEL=n run
 const ROS_MASTER_URI: &str = "http://10.0.2.2:11311";
+const HOSTNAME: &str = "127.0.0.1";
+const SLAVE_PORT: u16 = 5555;
 
 fn main() {
     println!("starting!");
@@ -9,8 +11,8 @@ fn main() {
     rosrust::init_with_master_uri_and_hostname_and_slave_port(
         "talker",
         ROS_MASTER_URI,
-        "192.168.203.132",
-        5555,
+        HOSTNAME,
+        SLAVE_PORT,
     );
     println!("initialized!");
 
